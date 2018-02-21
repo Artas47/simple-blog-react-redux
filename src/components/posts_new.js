@@ -16,7 +16,7 @@ class PostsNew extends Component{
             <label>{field.label}</label>
                 <input
                     className={className}
-                    type='text' 
+                    type={field.type}
                     {...field.input}
                 />
                 <div className='text-help'>
@@ -27,27 +27,38 @@ class PostsNew extends Component{
     }
 
     onSubmit = (values) => {
-        this.props.createPost(values);
+        //values contains title, categories and content
+        console.log('values',values);
+        this.props.createPost(values, () =>{
+            this.props.history.push('/');
+        });
     }
 
     render(){
         const { handleSubmit } = this.props;
+        console.log(this.props.handleSubmit);
 
        return(
+
+        // handleSumbnit is some redux stuff, it checks if everything with our form is ok
+        // then in call onSubmit
         <form  onSubmit={handleSubmit(this.onSubmit)}>
                 <Field 
                     label='Title'
                     name='title'
+                    type='text'
                     component={this.renderField}
                 />
                 <Field 
                     label='Categories'
                     name='categories'
+                    type='text'
                     component={this.renderField}
                 />
                 <Field 
                     label='Post Content'
                     name='content'
+                    type='text'
                     component={this.renderField}
                 />
 
@@ -56,8 +67,8 @@ class PostsNew extends Component{
                 </button>
 
                 <Link className='btn btn-danger' to='/'>
-            Cancel
-          </Link>
+                    Cancel
+                </Link>
         </form>
         )
     }
@@ -86,7 +97,6 @@ export default reduxForm({
     validate: validate,
     form: 'PostsNewForm'
 })(
-    
     connect(null, {createPost})(PostsNew)
 );
 

@@ -13,9 +13,10 @@ componentDidMount(){
 renderPosts(){
   return _.map(this.props.posts, post =>{
     return (
-      <li>
-         TITLE:{post.title}
-         CONTENT: {post.content}
+      <li key={post.id}>
+        <Link to={`/posts/${post.id}`}>
+          {post.title}
+         </Link>
       </li>
     );
   });
@@ -24,15 +25,16 @@ renderPosts(){
   render(){
     return(
       <div>
-        <div className='text-xs-right'>
-          <Link className='btn btn-primary' to='/post/new'>
-            Add a Post
-          </Link>
-        </div>
+        
         <h3>Posts</h3>
         <ul>
           {this.renderPosts()}
         </ul>
+        <div className='text-xs-right'>
+          <Link className='btn btn-primary' to='/posts/new'>
+            Add a Post
+          </Link>
+        </div>
       </div>
     )
   }
