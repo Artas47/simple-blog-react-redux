@@ -7,6 +7,7 @@ import {createPost} from '../actions';
 class PostsNew extends Component{
 
     renderField(field){
+        console.log('field is ', field)
         const { meta: {touched, error} } = field;
 
         const className = `form-control ${touched && error ? 'is-invalid' : ''}`;
@@ -36,12 +37,12 @@ class PostsNew extends Component{
 
     render(){
         const { handleSubmit } = this.props;
-        console.log(this.props.handleSubmit);
+       
 
        return(
 
-        // handleSumbnit is some redux stuff, it checks if everything with our form is ok
-        // then in call onSubmit
+        // handleSumbnit is some redux stuff, it checks if everything with our 
+        // form is ok then it calls onSubmit
         <form  onSubmit={handleSubmit(this.onSubmit)}>
                 <Field 
                     label='Title'
