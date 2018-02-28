@@ -6,70 +6,66 @@ import {createPost} from '../actions';
 
 class PostsNew extends Component{
 
-    renderField(field){
-        console.log('field is ', field)
-        const { meta: {touched, error} } = field;
+  renderField(field){
+    const { meta: {touched, error} } = field;
+    const className = `form-control ${touched && error ? 'is-invalid' : ''}`;
 
-        const className = `form-control ${touched && error ? 'is-invalid' : ''}`;
+  return (
+    <div>
+      <label>{field.label}</label>
+        <input
+          className={className}
+          type={field.type}
+          {...field.input} // need to pass it for our state to work
+          />
+          <div className='text-help'>
+            {touched ? error : ''}
+        	</div>
+      </div>
+    )
+  }
 
-        return (
-            <div>
-            <label>{field.label}</label>
-                <input
-                    className={className}
-                    type={field.type}
-                    {...field.input}
-                />
-                <div className='text-help'>
-                {touched ? error : ''}
-                </div>
-            </div>
-        )
-    }
+  onSubmit = (values) => {
+    //values contains title, categories and content
+    console.log('values',values);
+    this.props.createPost(values, () =>{
+        this.props.history.push('/');
+    });
+  }
 
-    onSubmit = (values) => {
-        //values contains title, categories and content
-        console.log('values',values);
-        this.props.createPost(values, () =>{
-            this.props.history.push('/');
-        });
-    }
-
-    render(){
-        const { handleSubmit } = this.props;
+  render(){
+    const { handleSubmit } = this.props;
        
-
-       return(
-
+  	return(
         // handleSumbnit is some redux stuff, it checks if everything with our 
         // form is ok then it calls onSubmit
-        <form  onSubmit={handleSubmit(this.onSubmit)}>
-                <Field 
-                    label='Title'
-                    name='title'
-                    type='text'
-                    component={this.renderField}
-                />
-                <Field 
-                    label='Categories'
-                    name='categories'
-                    type='text'
-                    component={this.renderField}
-                />
-                <Field 
-                    label='Post Content'
-                    name='content'
-                    type='text'
-                    component={this.renderField}
-                />
+      <form  onSubmit={handleSubmit(this.onSubmit)}>
+        <Field 
+          label='Title'
+          name='title'
+          type='text'
+          component={this.renderField}
+          />
+          <Field 
+            label='Categories'
+            name='categories'
+            type='text'
+            component={this.renderField}
+          />
+          <Field 
+          	label='Post Content'
+            name='content'
+            type='text'
+            component={this.renderField}
+          />
 
-                <button type='submit' className ='btn btn-primary'>
-                    Submit
-                </button>
+          <button type='submit' className ='btn btn-primary'>
+            Submit
+          </button>
 
-                <Link className='btn btn-danger' to='/'>
-                    Cancel
-                </Link>
+          <Link className='btn btn-danger' to='/'>
+            Cancel
+          </Link>
         </form>
         )
     }
