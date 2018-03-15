@@ -7,7 +7,7 @@ export const DELETE_POST = 'delete_post';
 
 
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api';
-const API_KEY = '?key=ELO1';
+const API_KEY = '?key=PAPERCLIP1234';
 
 
 export function fetchPosts() {

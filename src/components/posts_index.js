@@ -13,27 +13,36 @@ componentDidMount(){
 
 renderPosts(){
   return _.map(this.props.posts, post =>{
+    console.log('post',post)
     return (
-      <li key={post.id}>
-        <Link to={`/posts/${post.id}`}>
+      
+      <div style={{width: '400px'}} className='card d-inline-block m-3 text-center list-unstyled'>
+        <div className='card-header'>
           {post.title}
-        </Link>
-      </li>
+        </div>
+        <div className='card-text'>
+          <li key={post.id}>
+            <Link to={`/posts/${post.id}`}>
+              {post.content}
+            </Link>
+          </li>
+        </div>
+      </div>
     );
   });
 }
-
-
-
+ 
   render(){
     return(
       <div>
-        <h3>Posts</h3>
+        <h3 className='text-center my-3'> My Posts</h3>
+        <div>
           <ul>
             {this.renderPosts()}
           </ul>
-          <div className='text-xs-right'>
-            <Link className='btn btn-primary' to='/posts/new'>
+        </div>
+          <div>
+            <Link className='fixed-bottom text-center btn btn-outline-primary' to='/posts/new'>
               Add a Post
             </Link>
           </div>

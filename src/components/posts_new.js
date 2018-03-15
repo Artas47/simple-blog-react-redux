@@ -8,15 +8,15 @@ class PostsNew extends Component{
 
   renderField(field){
     const { meta: {touched, error} } = field;
-    const className = `form-control ${touched && error ? 'is-invalid' : ''}`;
+    const className = `form-control  ${touched && error ? 'is-invalid' : ''}`;
 
   return (
-    <div>
-      <label>{field.label}</label>
-        <input
-          className={className}
-          type={field.type}
-          {...field.input} // need to pass it for our state to work
+    <div >
+      <label className=''>{field.label}</label>
+        <input style={{textAlign: 'center'}}
+						className={className}
+						type={field.type}
+						{...field.input} // need to pass it for our state to work
           />
           <div className='text-help'>
             {touched ? error : ''}
@@ -39,7 +39,8 @@ class PostsNew extends Component{
   	return(
         // handleSumbnit is some redux stuff, it checks if everything with our 
         // form is ok then it calls onSubmit
-      <form  onSubmit={handleSubmit(this.onSubmit)}>
+        <div className=' text-center justify-content-center'>
+      <form className='form-group'  onSubmit={handleSubmit(this.onSubmit)}>
         <Field 
           label='Title'
           name='title'
@@ -58,15 +59,17 @@ class PostsNew extends Component{
             type='text'
             component={this.renderField}
           />
+          <div className='btn-group mt-5'>
+            <button type='submit' className ='btn btn-primary'>
+              Submit
+            </button>
 
-          <button type='submit' className ='btn btn-primary'>
-            Submit
-          </button>
-
-          <Link className='btn btn-danger' to='/'>
-            Cancel
-          </Link>
+            <Link className='btn btn-danger' to='/'>
+              Cancel
+            </Link>
+          </div>
         </form>
+        </div>
         )
     }
 }

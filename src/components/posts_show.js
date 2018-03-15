@@ -26,16 +26,19 @@ class PostsShow extends Component{
       return <div>Loading ...</div>
     }
     return(
-      <div>
-        <Link to='/'> Back to index </Link>
-        <button 
-          className='btn btn-danger pull-xs-right'
+      <div className='text-center'>
+        
+        <div className='card py-4'>
+        	<h3>Title: {post.title}</h3>
+          <h4 className='py-3'>Categories: {post.categories}</h4>
+          <h5>Content: {post.content}</h5>
+        </div>
+          <Link className='btn btn-primary' to='/'> Back to index </Link>
+          <button 
+          className='btn btn-danger '
           onClick={this.onDeleteClick}>
             Delete Post
           </button>
-        	<h3>{post.title}</h3>
-          <h6>{post.categories}</h6>
-          <p>{post.content}</p>
       </div>
     )
   }
